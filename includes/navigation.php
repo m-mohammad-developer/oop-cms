@@ -1,5 +1,4 @@
-
-
+<?php defined('SITE_ROOT') OR die("Access Denied!"); ?>
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">

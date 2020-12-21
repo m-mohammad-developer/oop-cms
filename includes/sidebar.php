@@ -1,4 +1,5 @@
- <!-- Blog Sidebar Widgets Column -->
+<?php defined('SITE_ROOT') OR die("Access Denied!"); ?>
+<!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 
                 <!-- Blog Search Well -->
@@ -19,20 +20,20 @@
                 <div class="well">
                     <h4>Blog Categories</h4>
                     <div class="row">
-                        <div class="col-lg-6">
-                            <ul class="list-unstyled">
-                                <li><a href="#">Category Name</a>
+                        <div class="col-lg-12">
+                            <ul class="list-unstyled">                          
+                            <?php
+                            $cats = classes\Cat::find_all();
+                            foreach ($cats as $cat):
+                            ?>
+                                <li><a href="cat.php?id=<?php echo $cat->id; ?>"><?php echo $cat->title; ?></a>
                                 </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
+                            <?php endforeach; ?>
                             </ul>
                         </div>
+
                         <!-- /.col-lg-6 -->
-                        <div class="col-lg-6">
+                        <!-- <div class="col-lg-6">
                             <ul class="list-unstyled">
                                 <li><a href="#">Category Name</a>
                                 </li>
@@ -43,7 +44,7 @@
                                 <li><a href="#">Category Name</a>
                                 </li>
                             </ul>
-                        </div>
+                        </div> -->
                         <!-- /.col-lg-6 -->
                     </div>
                     <!-- /.row -->
