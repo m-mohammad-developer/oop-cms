@@ -49,7 +49,8 @@ if (!isset($_GET['id'])) {
 
                 <!-- Author -->
                 <p class="lead">
-                    by <a href="#"><?php echo $post->post_user()->first_name; ?></a>
+                    <?php $user = \classes\User::find_by_id($post->user_id); ?>
+                    by <a href="user_posts.php?id=<?php echo $user->id; ?>" title="See User Posts"><?php echo $user->username; ?></a>
                 </p>
 
                 <hr>
