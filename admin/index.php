@@ -18,14 +18,10 @@
                     <pre>
                         <?php
 
-                        $arr = ["username" => 'ali', "password" => '12345'];
 
-                        $array = [];
-                        foreach ($arr as $key => $val) {
-                            $array[] = "$key = $val";
-                        }
-                        var_dump(implode(" and ", array_values($array)));
-                        print_r($array);
+                        $searched = \classes\Post::search_in_for('title', 'new');
+
+                        var_dump($searched);
 
                         ?>
 </pre>

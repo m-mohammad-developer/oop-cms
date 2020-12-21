@@ -68,13 +68,6 @@ class Db_object
 
 
 
-
-
-
-
-
-
-
     // Helper Functions
 
     public function creation_date()
@@ -89,11 +82,13 @@ class Db_object
 
     }
 
-
-
-    // End Helper Functions
-
-
+    // End Helper Functions    
+    public static function search_in_for($column, $searchFor) {
+        global $database;
+        $searchFor = $database->escape($searchFor);
+        $sql = "SELECT * FROM oop.". static::$db_table . " WHERE $column like '%$searchFor%' ";
+        return static::find_the_query($sql);
+    }
 
     public static function find_all() {
         $sql = "SELECT * FROM oop.". static::$db_table;
