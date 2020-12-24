@@ -8,7 +8,7 @@
 if (!isset($_POST['search-request']) || empty($_POST['search-text'])) {
     redirect("index.php");
 } else {
-    $posts = \classes\Post::search_in_for('title', $_POST['search-text']);
+    $posts = \classes\Post::search_in_for('tags', $_POST['search-text']);
 }
 
 ?>
