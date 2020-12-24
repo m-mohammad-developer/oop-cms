@@ -15,19 +15,22 @@ $posts = \classes\Post::find_all_where(['status' => 1, 'user_id' => $_GET["id"]]
             <!-- Blog Entries Column -->
             <div class="col-md-8">
 
-                <h1 class="page-header">
-                    Posts By: <?php echo \classes\User::find_by_id($_GET['id'])->username; ?>
-                </h1>
 
                 <!-- First Blog Post -->
                 <?php if($posts): ?>
-                <?php foreach ($posts as $post): ?>
+         
+                <h1 class="page-header">
+                <?php $user = \classes\User::find_by_id($_GET['id']); ?>
+                    Posts By: <?php echo $user ? $user->username : 'Admin'; ?>
+                </h1>
+
+                    <?php foreach ($posts as $post): ?>
                 <h2>
                     <a href="post.php?id=<?php echo $post->id; ?>"><?php echo $post->title;?></a>
                 </h2>
                 <p class="lead">
                     <?php $user = \classes\User::find_by_id($post->user_id); ?>
-                    by <a href="user_posts.php?id=<?php echo $user->id; ?>" title="See User Posts"><?php echo $user->username; ?></a>
+                    by <a href="user_posts.php?id=<?php echo $user ? $user->id : 1; ?>" title="See User Posts"><?php echo $user ? $user->username : "Admin"; ?></a>
                 </p>
                 <p><span class="glyphicon glyphicon-time"></span> Posted on <?php echo $post->creation_date();?></p>
                 <hr>

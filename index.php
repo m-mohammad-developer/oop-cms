@@ -25,7 +25,7 @@ $posts = \classes\Post::find_all_where(['status' => 1]);
                 </h2>
                 <p class="lead">
                     <?php $user = \classes\User::find_by_id($post->user_id); ?>
-                    by <a href="user_posts.php?id=<?php echo $user->id; ?>" title="See User Posts"><?php echo $user->username; ?></a>
+                    by <a href="user_posts.php?id=<?php echo $user ? $user->id : 1; ?>" title="See User Posts"><?php echo $user ? $user->username : "Admin"; ?></a>
                 </p>
                 <p><span class="glyphicon glyphicon-time"></span> Posted on <?php echo $post->creation_date();?></p>
                 <hr>
