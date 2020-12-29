@@ -16,14 +16,11 @@
                         <small>Subheading</small>
                     </h1>
                     <pre>
-                        <?php
+                 
 
+                        <a href="<?php echo SITE; ?>">OKKK</a>
 
-                        $searched = \classes\Post::search_in_for('title', 'new');
-
-                        var_dump($searched);
-
-                        ?>
+                      
 </pre>
 
 
