@@ -1,6 +1,7 @@
 <?php
 namespace classes;
 
+use PDOException;
 
 require_once(INCLUDES_PATH .DS. 'configuration' .DS. "config.php");
 
@@ -28,8 +29,11 @@ class Database
             \PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8",
             \PDO::ATTR_ERRMODE => \PDO::ERRMODE_WARNING
         );
-
-        $this->pdo = new \PDO("mysql:host=".$this->db_host.";db_name=".$this->db_name.";", $this->db_user,$this->db_pass, $this->options);
+        try {
+            $this->pdo = new \PDO("mysql:host=".$this->db_host.";db_name=".$this->db_name.";", $this->db_user,$this->db_pass, $this->options);
+        } catch (\PDOException $e) {
+            die("Database Conection Failed :: " . $e->getMessage());
+        }
 
     }
 

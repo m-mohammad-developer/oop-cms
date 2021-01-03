@@ -20,14 +20,12 @@ defined("UPLOAD_DIR") ? : define("UPLOAD_DIR", SITE_ROOT.DS."uploads");
 
 
 require_once INCLUDES_PATH . DS . 'functions.php';
-
 //require_once "vendor/autoload.php";
-
-
 require_once INCLUDES_PATH . DS . 'classes' . DS . 'Database.php';
-require_once INCLUDES_PATH . DS . 'classes' . DS . 'Db_object.php';
-require_once INCLUDES_PATH . DS . 'classes' . DS . 'User.php';
-require_once INCLUDES_PATH . DS . 'classes' . DS . 'Session.php';
+
+// require_once INCLUDES_PATH . DS . 'classes' . DS . 'Db_object.php';
+// require_once INCLUDES_PATH . DS . 'classes' . DS . 'User.php';
+// require_once INCLUDES_PATH . DS . 'classes' . DS . 'Session.php';
 
 
 

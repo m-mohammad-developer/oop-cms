@@ -9,7 +9,6 @@ const DATABASE_INFO = array(
     "USER" => 'root',
     "PASS" => '',
     "NAME" => 'oop'
-    
 );
 
 

@@ -55,37 +55,42 @@ class Db_object
     }
 
     // End Helper Functions    
-    public static function search_in_for($column, $searchFor) {
+
+    /**
+     * 
+     * 
+     */
+    public static function search_in_for(string $column, string $searchFor, string $order = "desc") {
         global $database;
         $searchFor = $database->escape($searchFor);
-        $sql = "SELECT * FROM ". static::$db_name .".". static::$db_table . " WHERE $column like '%$searchFor%' ";
+        $sql = "SELECT * FROM ". static::$db_name .".". static::$db_table . " WHERE $column like '%$searchFor%' ORDER BY " . static::$auto_increment . " $order";
         return static::find_the_query($sql);
     }
 
-    public static function find_all() {
-        $sql = "SELECT * FROM ". static::$db_name .".". static::$db_table;
+    public static function find_all(string $order = "desc") {
+        $sql = "SELECT * FROM ". static::$db_name .".". static::$db_table . " ORDER BY " . static::$auto_increment . " $order";
         return static::find_the_query($sql);
     }
 
-    public static function find_all_where(array $arr) {
+    public static function find_all_where(array $arr, string $order) {
         $array = [];
         foreach ($arr as $key => $val) {
             $array[] = "$key = ?";
         }
-        $sql = "SELECT * FROM ". static::$db_name .".". static::$db_table . " WHERE " . implode(" and ", array_values($array)) ;
+        $sql = "SELECT * FROM ". static::$db_name .".". static::$db_table . " WHERE " . implode(" and ", array_values($array)) ."  ORDER BY " . static::$auto_increment . " $order" ;
         return static::find_the_query($sql, array_values($arr));
     }
 
 
 
-    public static function find_by_id($id)
+    public static function find_by_id(int $id)
     {
         $sql = "SELECT * FROM ". static::$db_name .".". static::$db_table ." WHERE ". static::$auto_increment ." = ? LIMIT 1";
         $result = static::find_the_query($sql, [$id], 'fetch');
         return !empty($result) ? array_shift($result) : false;
     }
 
-    public static function find_the_query($sql, $values = [], $type = "fetchAll")
+    public static function find_the_query(string $sql, array $values = [], string $type = "fetchAll")
     {
         global $database;
 
@@ -231,7 +236,7 @@ class Db_object
 
     }
 
-
+    // save phot and post if both are set
     public function save_with_photo()
     {
 
@@ -239,12 +244,8 @@ class Db_object
 //            $this->errors[] = "You can just upload photo with JPG Extension";
 //            return false;
 //        }
-
         $target_path = SITE_ROOT . DS . $this->upload_directory;
-
 //        $file_name = rand(1,1000) . "_" . rand(1000, 2000) . ""
-
-
 
         if (!isset($this->id)) {
 
