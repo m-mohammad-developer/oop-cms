@@ -2,7 +2,7 @@
 
 # Setup
 
-1. Create a database named oop(yo can change it but you have to change the name somewheres)
+1. Create a database named oop(you can change it but you have to change the name somewheres)
 2. Import oop.sql to oop database that created
 3. boom Login via user admin and password 123456
 
