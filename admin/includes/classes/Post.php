@@ -68,12 +68,7 @@ class Post extends Db_object
     }
 
     public static function change_status ($id, $status) {
-
         global $database;
-//        $status = ctype_digit($status);
-
-//        $status = $status ?: 0;
-
         return $database->do("update oop.".static::$db_table ." set status = ? where id = ?", [$status, $id]);
     }
 
@@ -171,9 +166,7 @@ class Post extends Db_object
 
         }
 
-
     }
-
 
 
     public function delete_photo()
@@ -187,8 +180,6 @@ class Post extends Db_object
             return false;
         }
 
-
-
     }
 
     public function delete_with_photo()
@@ -196,9 +187,6 @@ class Post extends Db_object
         $this->delete_photo();
         $this->delete();
     }
-
-
-
 
 
 }

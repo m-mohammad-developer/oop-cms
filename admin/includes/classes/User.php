@@ -68,16 +68,6 @@ class User extends Db_object
         if ($users) return true;
         return false;
     }
-    /*
-    $id;
-    public $username;
-    public $email;
-    public $password;
-    public $first_name;
-    public $last_name;
-    public $role;
-    public $about;
-    */
 
     public function register(string $username, string $email, string $password = null, string $first_name = null, string $last_name = null, string $role = null, string $about = null)
     {
@@ -98,16 +88,6 @@ class User extends Db_object
 
 
     }
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -4,6 +4,7 @@ namespace classes;
 
 class Db_object
 {
+    protected static $db_name = "oop";
 
     public static $db_table = "users";
     public static $db_fields = array(
@@ -11,16 +12,9 @@ class Db_object
     );
     public static $auto_increment = "id";
 
-
-
     // To save and read date in database
     public static $time_column = "register_date";
-
-
-
-
     // Upload Photo section properties
-
 
     // Setting properties for moving file
     public $file_name;
@@ -45,36 +39,14 @@ class Db_object
         UPLOAD_ERR_EXTENSION => "A PHP extension stopped the file upload"
 
     );
-
-
-
-
     // End Upload Photo section properties
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     // Helper Functions
-
     public function creation_date()
     {
         global $database;
 
-        $sql = "SELECT ". static::$time_column ." FROM oop.". static::$db_table ." WHERE ". static::$auto_increment ." = ?";
+        $sql = "SELECT ". static::$time_column ." FROM   ". static::$db_name .".". static::$db_table ." WHERE ". static::$auto_increment ." = ?";
 
         $time = $database->select($sql, [$this->id], 'fetch');
 
@@ -86,12 +58,12 @@ class Db_object
     public static function search_in_for($column, $searchFor) {
         global $database;
         $searchFor = $database->escape($searchFor);
-        $sql = "SELECT * FROM oop.". static::$db_table . " WHERE $column like '%$searchFor%' ";
+        $sql = "SELECT * FROM ". static::$db_name .".". static::$db_table . " WHERE $column like '%$searchFor%' ";
         return static::find_the_query($sql);
     }
 
     public static function find_all() {
-        $sql = "SELECT * FROM oop.". static::$db_table;
+        $sql = "SELECT * FROM ". static::$db_name .".". static::$db_table;
         return static::find_the_query($sql);
     }
 
@@ -100,7 +72,7 @@ class Db_object
         foreach ($arr as $key => $val) {
             $array[] = "$key = ?";
         }
-        $sql = "SELECT * FROM oop.". static::$db_table . " WHERE " . implode(" and ", array_values($array)) ;
+        $sql = "SELECT * FROM ". static::$db_name .".". static::$db_table . " WHERE " . implode(" and ", array_values($array)) ;
         return static::find_the_query($sql, array_values($arr));
     }
 
@@ -108,7 +80,7 @@ class Db_object
 
     public static function find_by_id($id)
     {
-        $sql = "SELECT * FROM oop.". static::$db_table ." WHERE ". static::$auto_increment ." = ? LIMIT 1";
+        $sql = "SELECT * FROM ". static::$db_name .".". static::$db_table ." WHERE ". static::$auto_increment ." = ? LIMIT 1";
         $result = static::find_the_query($sql, [$id], 'fetch');
         return !empty($result) ? array_shift($result) : false;
     }
@@ -178,7 +150,7 @@ class Db_object
     public function create()
     {
         global $database;
-        $sql = "INSERT INTO oop.". static::$db_table ." SET ";
+        $sql = "INSERT INTO ". static::$db_name .".". static::$db_table ." SET ";
         $sql .= implode('=?,', array_keys($this->properties())) ."=?";
         $result = $database->do($sql, array_values($this->properties()));
         if ($result) {
@@ -194,7 +166,7 @@ class Db_object
         global $database;
         $values_array = array_values($this->properties());
         array_push($values_array, $this->id);
-        $sql = "UPDATE oop.". static::$db_table ." SET ";
+        $sql = "UPDATE ". static::$db_name .".". static::$db_table ." SET ";
         $sql .= implode('=?,', array_keys($this->properties())) ."=? WHERE " . static::$auto_increment . "=?";
         $result = $database->do($sql, $values_array, 'update');
         if($result)
@@ -209,7 +181,7 @@ class Db_object
     public function delete()
     {
         global $database;
-        $sql = "DELETE FROM oop.". static::$db_table. " WHERE ". static::$auto_increment ." =?";
+        $sql = "DELETE FROM ". static::$db_name .".". static::$db_table. " WHERE ". static::$auto_increment ." =?";
         $result = $database->do($sql, [$this->id], 'delete');
         return $result;
     }
