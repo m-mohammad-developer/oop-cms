@@ -72,7 +72,7 @@ class Db_object
         return static::find_the_query($sql);
     }
 
-    public static function find_all_where(array $arr, string $order) {
+    public static function find_all_where(array $arr, string $order = "string") {
         $array = [];
         foreach ($arr as $key => $val) {
             $array[] = "$key = ?";
