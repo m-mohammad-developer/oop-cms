@@ -1,7 +1,6 @@
 <?php
 namespace classes;
-
-
+defined('SITE_ROOT') OR die("Access Denied!");
 class Db_object
 {
     protected static $db_name = "oop";

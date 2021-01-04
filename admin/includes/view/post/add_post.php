@@ -1,7 +1,5 @@
+<?php defined('SITE_ROOT') OR die("Access Denied!"); ?>
 <?php
-
-
-
 if (isset($_POST['create_post'])) {
 
     $form_errors = [];
@@ -9,12 +7,9 @@ if (isset($_POST['create_post'])) {
         $form_errors['title'] = "title Should Not Be Empty";
     }
 
-
-
     if(!(($_POST['status'] == 1) || ($_POST['status'] == 0))) {
         $form_errors['status'] = "Choose Right Status";
     }
-
 
     foreach ($form_errors as $key) {
         if (empty($form_errors[$key])) {
@@ -37,15 +32,11 @@ if (isset($_POST['create_post'])) {
 
             $post->set_post_photo($_FILES['photo']);
 
-
             if ($post->save_with_photo()) {
                 redirect("posts.php");
             }
-
         }
     }
-
-
 }
 ?>
 <div class="col-sm-12"  style="">
@@ -53,7 +44,6 @@ if (isset($_POST['create_post'])) {
         Add post
         <small>Admin Access</small>
     </h1>
-
 
     <?php if (isset($form_errors) && !empty($form_errors)): ?>
     <ul class="list-group">
@@ -64,14 +54,8 @@ if (isset($_POST['create_post'])) {
         ?>
     </ul>
     <?php endif; ?>
-
     <form action="" method="post" enctype="multipart/form-data">
-
-
-
-
         <br />
-
         <div class="form-group">
             <label for="title">Post Title</label>
             <input type="text" name="title" class="form-control" placeholder="Enter the title ">
@@ -81,9 +65,7 @@ if (isset($_POST['create_post'])) {
             <label for="content">Post Content</label>
             <textarea class="form-control" name="content" cols="30" rows="20" placeholder="Write Post Content"></textarea>
         </div>
-
         <hr />
-
         <div class="form-group">
             <label for="role">Choose Post Category</label>
             <select class="form-control" name="cat_id" id="">

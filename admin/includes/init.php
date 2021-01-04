@@ -24,7 +24,3 @@ require_once 'vendor/autoload.php';
 $database = new classes\Database();
 // Set Session
 $session = new classes\Session();
-
-
-
-

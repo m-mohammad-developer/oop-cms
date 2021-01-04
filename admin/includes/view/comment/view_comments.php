@@ -1,3 +1,4 @@
+<?php defined('SITE_ROOT') OR die("Access Denied!"); ?>
 <?php
 use classes\Comment;
 

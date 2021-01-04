@@ -1,7 +1,5 @@
+<?php defined('SITE_ROOT') OR die("Access Denied!"); ?>
 <?php
-
-
-
 if (isset($_POST['create_user'])) {
 
     $form_errors = [];
@@ -53,15 +51,6 @@ if (isset($_POST['create_user'])) {
             }
         }
     }
-
-
-
-
-
-
-
-
-
 }
 ?>
 <div class="col-sm-12">
@@ -69,7 +58,6 @@ if (isset($_POST['create_user'])) {
         Add user
         <small>Admin Access</small>
     </h1>
-
 
     <?php if (isset($form_errors) && !empty($form_errors)): ?>
     <ul class="list-group">
@@ -83,11 +71,7 @@ if (isset($_POST['create_user'])) {
 
     <form action="" method="post">
 
-
-
-
         <br />
-
         <div class="form-group">
             <label for="first_name">First Name</label>
             <input type="text" name="first_name" class="form-control" placeholder="Enter Your First Name ">

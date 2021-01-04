@@ -1,16 +1,14 @@
 <?php
 namespace classes;
-
-
+defined('SITE_ROOT') OR die("Access Denied!");
 class Post extends Db_object
 {
+    /** Properties */
     public static $db_table = "posts";
     public static $db_fields = array(
         'title', 'content', 'photo', 'status', 'user_id', 'cat_id', 'tags', 'description'
     );
     public static $auto_increment = "id";
-
-
 
     public $id;
     public $title;
@@ -21,13 +19,8 @@ class Post extends Db_object
     public $cat_id;
     public $tags;
     public $description;
-
-
     // To save and read date in database
     public static $time_column = "creation_date";
-
-
-
     // Setting properties for moving file
     public $file_name;
     public $file_size;
@@ -52,17 +45,12 @@ class Post extends Db_object
 
     );
 
-
-
-
+    /** Methods */
     public function creation_date()
     {
         global $database;
-
         $sql = "SELECT ". static::$time_column ." FROM oop.". static::$db_table ." WHERE ". static::$auto_increment ." = ?";
-
         $time = $database->select($sql, [$this->id], 'fetch');
-
         return array_shift($time);
 
     }
@@ -71,8 +59,6 @@ class Post extends Db_object
         global $database;
         return $database->do("update oop.".static::$db_table ." set status = ? where id = ?", [$status, $id]);
     }
-
-
 
     public function get_photo_path()
     {
@@ -88,8 +74,6 @@ class Post extends Db_object
     {
         return User::find_by_id($this->user_id);
     }
-
-
 
     public function set_post_photo($photo) {
         // $photo : $_FILES['name']
@@ -165,13 +149,10 @@ class Post extends Db_object
             }
 
         }
-
     }
-
 
     public function delete_photo()
     {
-
         $target_path = SITE_ROOT . DS . $this->upload_directory . DS . $this->photo;
 
         if (unlink($target_path)) {
@@ -179,7 +160,6 @@ class Post extends Db_object
         } else {
             return false;
         }
-
     }
 
     public function delete_with_photo()
@@ -187,6 +167,5 @@ class Post extends Db_object
         $this->delete_photo();
         $this->delete();
     }
-
 
 }

@@ -1,10 +1,8 @@
 <?php
 namespace classes;
-
+defined('SITE_ROOT') OR die("Access Denied!");
 use PDOException;
-
 require_once(INCLUDES_PATH .DS. 'configuration' .DS. "config.php");
-
 class Database
 {
     /** Properties */
@@ -14,7 +12,6 @@ class Database
     private $db_name;
     private $options;
     public $pdo;
-
 
     /** Methods */
     public function __construct()
@@ -47,7 +44,6 @@ class Database
         } else {
             return $result->rowCount() >= 1;
         }
-
     }
 
     public function select($sql, $values =[], $type = "fetchAll")
@@ -66,23 +62,15 @@ class Database
         } else {
             return false;
         }
-
-
     }
-
 
     public function the_insert_id()
     {
         return $this->pdo->lastInsertId();
     }
 
-
     public function escape($item)
     {
-
         return (htmlspecialchars(htmlentities(trim($item))));
-
-
     }
-
 }

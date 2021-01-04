@@ -1,6 +1,5 @@
 <?php
-
-
+defined('SITE_ROOT') OR die("Access Denied!");
 
 if (isset($_POST['create_cat'])) {
 

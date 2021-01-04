@@ -1,3 +1,4 @@
+<?php defined('SITE_ROOT') OR die("Access Denied!"); ?>
 <?php use classes\User; ?>
 <?php
 $user = User::find_by_id($_GET['id']);
@@ -5,14 +6,9 @@ $user = User::find_by_id($_GET['id']);
 if (empty($_GET['id'])) {
     redirect("users.php");
 }
-
-
-
 if (isset($_POST['update_user'])) {
 
     $form_errors = [];
-
-
 
     if(empty($_POST['username'])) {
         $form_errors['username_empty'] = "Username Should Not Be Empty";
@@ -59,17 +55,7 @@ if (isset($_POST['update_user'])) {
                 redirect("users.php");
             }
         }
-
     }
-
-
-
-
-
-
-
-
-
 }
 ?>
 <div class="col-sm-12"  style="">
@@ -81,7 +67,6 @@ if (isset($_POST['update_user'])) {
     <p class="pull-right">
         Date Registered : <?php echo $user->creation_date($user->id); ?>
     </p>
-
 
     <?php if (isset($form_errors) && !empty($form_errors)): ?>
     <ul class="list-group">
@@ -95,9 +80,7 @@ if (isset($_POST['update_user'])) {
 
     </span>
     <?php endif; ?>
-
     <form action="" method="post">
-
         <div class="form-group">
             <label for="first_name">First Name</label>
             <input type="text" name="first_name" class="form-control" placeholder="Enter Your First Name " value="<?php echo $user->first_name; ?>">
