@@ -7,7 +7,7 @@ require_once(INCLUDES_PATH .DS. 'configuration' .DS. "config.php");
 
 class Database
 {
-
+    /** Properties */
     private $db_user;
     private $db_pass;
     private $db_host;
@@ -16,9 +16,7 @@ class Database
     public $pdo;
 
 
-
-
-
+    /** Methods */
     public function __construct()
     {
         $this->db_user = DATABASE_INFO['USER'];
@@ -34,22 +32,15 @@ class Database
         } catch (\PDOException $e) {
             die("Database Conection Failed :: " . $e->getMessage());
         }
-
     }
-
-
 
     public function do($sql, $values = [], $type = "insert")
     {
         $result = $this->pdo->prepare($sql);
-
         foreach ($values as $key => $value) {
             $result->bindValue($key + 1, $value);
         }
-
         $result->execute();
-
-
         if($type == "insert")
         {
             return $result ? true : false;
@@ -57,31 +48,21 @@ class Database
             return $result->rowCount() >= 1;
         }
 
-
-
     }
-
-
 
     public function select($sql, $values =[], $type = "fetchAll")
     {
-
         $result = $this->pdo->prepare($sql);
-
         foreach ($values as $key => $value) {
             $result->bindValue($key + 1, $value);
         }
-
         $result->execute();
-
         if ($result) {
-
             if ($type == "fetchAll") {
                 return $result->fetchAll(\PDO::FETCH_ASSOC);
             } else {
                 return $result->fetch(\PDO::FETCH_ASSOC);
             }
-
         } else {
             return false;
         }
@@ -104,17 +85,4 @@ class Database
 
     }
 
-
-
-
-
-
-
-
-
-
 }
-
-$database = new Database();
-//$GLOBALS['database'] = new Database();
-
