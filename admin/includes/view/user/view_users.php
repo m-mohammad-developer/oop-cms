@@ -1,10 +1,8 @@
+<?php defined('SITE_ROOT') OR die("Access Denied!"); ?>
 <?php
 use classes\User;
 
-
 $users = User::find_all();
-
-
 ?>
 
 <div class="col-lg-12"  style="overflow: auto;">
@@ -14,10 +12,7 @@ $users = User::find_all();
         <small>Admin Access</small>
     </h1>
 
-
-
     <table class="table table-responsive table-bordered">
-
         <thead>
             <tr>
                 <th>Id</th>
@@ -60,32 +55,19 @@ $users = User::find_all();
             </td>
 
             <td>
-
                 <a class="btn btn-primary" href="?source=edit_user&id=<?php echo $user->id; ?>">Edit</a>
-
-
-
             </td>
 
             <td>
-
                 <form action="" method="post">
                     <input type="hidden" name="delete_id" value="<?php echo $user->id; ?>">
                     <input type="submit" class="btn btn-danger" name="delete_item_btn" value="Delete">
                 </form>
-
             </td>
         </tr>
-
         <?php endforeach; ?>
         </tbody>
-
-
     </table>
-
-
-
-
 <?php
 if (isset($_POST['delete_item_btn'])) {
 
@@ -98,25 +80,5 @@ if (isset($_POST['delete_item_btn'])) {
     redirect("users.php");
 
 }
-
-
 ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </div>

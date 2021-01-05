@@ -1,10 +1,9 @@
 <?php
 namespace classes;
-
-
+defined('SITE_ROOT') OR die("Access Denied!");
 class User extends Db_object
 {
-
+    /** Properties */
     public static $db_table = "users";
     public static $db_fields = array(
         'username', 'password', 'email', 'password', 'first_name', 'last_name', 'role', 'about'
@@ -20,24 +19,17 @@ class User extends Db_object
     public $role;
     public $about;
 
-
-
     // Upload User Image properaties
     public $upload_directory = "uploads".DS."posts";
-
     // End Upload User Image properaties
-
-
     // Password Encryption
     public $pass_randsalt = "IwillFuckYouIfyouTryto";
     public $pass_options = [
         'cost' => 12,
     ];
-
-
+    // set time column 
     public static $time_column = "register_date";
-
-
+    /** Methods */
     // Helper Functions
 
     public function encrypt_pass()
@@ -83,14 +75,8 @@ class User extends Db_object
 
         if (static::isUsernameExists($this->username)) return false;
         if (static::isEmailExists($this->email)) return false;
-
         return ($this->save()) ? true : false;
-
-
     }
-
-
-
 
 }
 

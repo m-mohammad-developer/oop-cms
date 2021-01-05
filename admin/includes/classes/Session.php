@@ -1,30 +1,21 @@
 <?php
 namespace classes;
-
+defined('SITE_ROOT') OR die("Access Denied!");
 class Session  {
-
+    /** Properties */
     public $user_info = array();
-
-
-
-
-
+    
+    /** Methods */
     public function login ($username, $password) {
-
         global $database;
-
         $sql = 'select * from oop.users where username = ? limit 1';
 
         $user = $database->pdo->prepare($sql);
         $user->bindValue(1, $database->escape($username));
-
         $user->execute();
-
         $user = $user->fetch(\PDO::FETCH_OBJ);
-
         if ($user) {
             if (password_verify($password, $user->password)) {
-
                 $this->user_info = [
                     'id' => $user->id ,
                     'first_name' => $user->first_name ,
@@ -33,20 +24,14 @@ class Session  {
                     'email' => $user->email ,
                     'access' => $user->role
                 ];
-
                 $_SESSION['user_info'] = $this->user_info;
                 return true;
-
             } else {
                 return false;
             }
         }
-
         return false;
-
     }
-
-
 
     public function set_message(string $name, string $message)
     {
@@ -56,13 +41,10 @@ class Session  {
         return false;
     }
 
-
-
     public function check_for_message(string $name)
     {
         //session_start();
         return @$_SESSION['messages'][$name];
-        
     }
     // public function get_message($name) {
     //     if ($_SESSION['m'])
@@ -73,22 +55,16 @@ class Session  {
     }
 
     public function remove_message(string $name) {
-
         if (isset($_SESSION['messages'][$name])) 
         {
             unset($_SESSION['messages'][$name]);
         }
     }
-
     public function get_all_meassges()
     {
         return @$_SESSION['messages'];
     }
-
-
-
     // setting costume messages by SESSION
-
     public function set_custom_msg($name, $msg)
     {
         global $database;
@@ -100,19 +76,10 @@ class Session  {
         return isset($_SESSION[$name]) ? $_SESSION[$name] : false;
     }
 
-    
-
     public function remove_custom_message(string $name) {
-
         if (isset($_SESSION['messages'][$name])) 
         {
             unset($_SESSION['messages'][$name]);
         }
     }
-
-
-
 }
-
-
-$session = new Session();

@@ -1,3 +1,4 @@
+<?php defined('SITE_ROOT') OR die("Access Denied!"); ?>
 <?php
 if (empty($_GET['id'])) {
     redirect("posts.php");

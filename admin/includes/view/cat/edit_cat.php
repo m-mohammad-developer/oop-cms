@@ -1,3 +1,4 @@
+<?php defined('SITE_ROOT') OR die("Access Denied!"); ?>
 <?php use classes\Cat; ?>
 <?php
 if (empty($_GET['id'])) {
@@ -6,14 +7,8 @@ if (empty($_GET['id'])) {
 
 $cat = Cat::find_by_id($_GET['id']);
 
-
-
-
-
 if (isset($_POST['update_cat'])) {
-
     $form_errors = [];
-
 
     if(empty($_POST['title'])) {
         $form_errors['title_empty'] = "title Should Not Be Empty";
@@ -21,7 +16,6 @@ if (isset($_POST['update_cat'])) {
     if(strlen($_POST['title']) <= 3) {
         $form_errors['title_len'] = "title Should Be Longer Than 2";
     }
-
 
     foreach ($form_errors as $key) {
         if (empty($form_errors[$key])) {

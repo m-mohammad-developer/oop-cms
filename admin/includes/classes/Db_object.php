@@ -1,7 +1,6 @@
 <?php
 namespace classes;
-
-
+defined('SITE_ROOT') OR die("Access Denied!");
 class Db_object
 {
     protected static $db_name = "oop";
@@ -72,7 +71,7 @@ class Db_object
         return static::find_the_query($sql);
     }
 
-    public static function find_all_where(array $arr, string $order) {
+    public static function find_all_where(array $arr, string $order = "desc") {
         $array = [];
         foreach ($arr as $key => $val) {
             $array[] = "$key = ?";

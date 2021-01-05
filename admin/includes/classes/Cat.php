@@ -1,10 +1,9 @@
 <?php
-
 namespace classes;
-
-
+defined('SITE_ROOT') OR die("Access Denied!");
 class Cat extends Db_object
-{
+{   
+    /** Properties */
     public static $db_table = "categories";
     public static $db_fields = array(
         'title', 'description'
@@ -15,10 +14,6 @@ class Cat extends Db_object
     public $id;
     public $title;
     public $description;
-
-
-
-
 
 
 }

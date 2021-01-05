@@ -1,3 +1,4 @@
+<?php defined('SITE_ROOT') OR die("Access Denied!"); ?>
 <?php
 use classes\Post;
 
@@ -6,20 +7,14 @@ if (isset($_SESSION['user_info']['access']) && $_SESSION['user_info']['access'] 
 } else {
     $posts = Post::find_the_query("select * from oop.posts where user_id = ?", [$_SESSION['user_info']['id']]);
 }
-
 ?>
-
 <div class="col-lg-12"  style="overflow: auto;">
     <a href="?source=add_post" class="btn btn-primary pull-right">+ New</a>
     <h1 class="page-header">
         All posts
         <small>Admin Access</small>
     </h1>
-
-
-
     <table class="table table-responsive table-bordered">
-
         <thead>
             <tr>
 <!--                <th>Photo</th>-->
@@ -94,9 +89,6 @@ if (isset($_SESSION['user_info']['access']) && $_SESSION['user_info']['access'] 
 
     </table>
 
-
-
-
 <?php
 if (isset($_POST['delete_item_btn'])) {
     $post_id_for_delete = $_POST['delete_id'];
@@ -109,40 +101,18 @@ if (isset($_POST['delete_item_btn'])) {
     redirect("posts.php");
 
 }
-
-
 if (isset($_POST['publish_post'])) {
 
     $post_id = $_POST['post_id'];
     Post::change_status($post_id, 1);
     redirect("posts.php");
 }
-
 if (isset($_POST['draft_post'])) {
-
     $post_id = $_POST['post_id'];
     Post::change_status($post_id, 0);
     redirect("posts.php");
 }
 
-
 ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 </div>
